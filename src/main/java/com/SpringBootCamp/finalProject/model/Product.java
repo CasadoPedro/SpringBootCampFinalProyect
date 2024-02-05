@@ -1,10 +1,10 @@
 package com.SpringBootCamp.finalProject.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Setter @Getter
@@ -19,4 +19,7 @@ public class Product {
     private String brand;
     private Double cost;
     private Double available_quantity;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "products_list",fetch = FetchType.LAZY)
+    private List<Sale> sales;
 }

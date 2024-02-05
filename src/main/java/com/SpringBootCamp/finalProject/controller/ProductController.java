@@ -22,6 +22,10 @@ public class ProductController {
     public Product getProducts(@PathVariable("productCode") Long productCode){
         return productServ.findProduct(productCode);
     }
+    @GetMapping("/product/lower_stock/{quantity}")
+    public List<Product> lowerStock(@PathVariable Double quantity){
+        return productServ.lowerStock(quantity);
+    }
 
     @PostMapping("/product/create")
     public void createProduct(@RequestBody Product product){

@@ -2,7 +2,10 @@ package com.SpringBootCamp.finalProject.service;
 
 import com.SpringBootCamp.finalProject.model.Client;
 import com.SpringBootCamp.finalProject.model.Client;
+import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.repository.IClientRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ public class ClientService implements IClientService{
 
     @Autowired
     private IClientRepository clientRepo;
+    ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public void saveClient(Client client) {
@@ -36,10 +40,9 @@ public class ClientService implements IClientService{
 
     @Override
     public void editClient(Long clientId, Client updatedClient) {
-        Client client = this.findClient(clientId);
-        client.setName(updatedClient.getName());
-        client.setLast_name(updatedClient.getLast_name());
-        client.setEmail(updatedClient.getEmail());
+        Client client = clientRepo.findById(clientId).orElseThrow(() -> new EntityNotFoundException("Client with id " + clientId + " not found"));
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(updatedClient, client);
         this.saveClient(client);
     }
 }

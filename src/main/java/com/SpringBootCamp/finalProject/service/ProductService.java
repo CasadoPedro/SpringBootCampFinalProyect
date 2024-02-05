@@ -2,6 +2,8 @@ package com.SpringBootCamp.finalProject.service;
 
 import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.repository.IProductRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Service
 public class ProductService implements IProductService{
+
+    ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     private IProductRepository productRepo;
@@ -35,11 +39,15 @@ public class ProductService implements IProductService{
 
     @Override
     public void editProduct(Long productCode, Product updatedProduct) {
-        Product product = this.findProduct(productCode);
-        product.setName(updatedProduct.getName());
-        product.setBrand(updatedProduct.getBrand());
-        product.setCost(updatedProduct.getCost());
-        product.setAvailable_quantity(updatedProduct.getAvailable_quantity());
+        Product product = productRepo.findById(productCode).orElseThrow(() -> new EntityNotFoundException("Product with id " + productCode + " not found"));
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(updatedProduct, product);
         this.saveProduct(product);
     }
+
+    @Override
+    public List<Product> lowerStock(Double quantity) {
+        return productRepo.findAllByAvailable_quantityLessThan(quantity);
+    }
+
 }

@@ -16,4 +16,5 @@ public interface IProductService {
 
     public void editProduct(Long productCode,Product updatedProduct);
 
+    public List<Product> lowerStock(Double quantity);
 }

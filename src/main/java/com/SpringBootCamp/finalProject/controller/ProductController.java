@@ -8,36 +8,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private IProductService productServ;
 
-    @GetMapping("/product/list")
+    @GetMapping("/list")
     public List<Product> getProducts(){
         return productServ.productList();
     }
 
-    @GetMapping("/product/list/{productCode}")
+    @GetMapping("/list/{productCode}")
     public Product getProducts(@PathVariable("productCode") Long productCode){
         return productServ.findProduct(productCode);
     }
-    @GetMapping("/product/lower_stock/{quantity}")
+    @GetMapping("/lower_stock/{quantity}")
     public List<Product> lowerStock(@PathVariable Double quantity){
         return productServ.lowerStock(quantity);
     }
 
-    @PostMapping("/product/create")
+    @PostMapping("/create")
     public void createProduct(@RequestBody Product product){
         productServ.saveProduct(product);
     }
 
-    @DeleteMapping("/product/delete/{productCode}")
+    @DeleteMapping("/delete/{productCode}")
     public void deleteProduct(@PathVariable Long productCode){
         productServ.deleteProduct(productCode);
     }
 
-    @PutMapping("/product/edit/{productCode}")
+    @PutMapping("/edit/{productCode}")
     public void editProduct(@PathVariable Long productCode,
                               @RequestBody Product product){
         productServ.editProduct(productCode,product);

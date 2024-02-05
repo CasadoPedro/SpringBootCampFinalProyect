@@ -30,7 +30,7 @@ public class ClientService implements IClientService{
 
     @Override
     public Client findClient(Long clientId) {
-        return clientRepo.findById(clientId).orElse(null);
+        return clientRepo.findById(clientId).orElseThrow(() -> new EntityNotFoundException("Client with id " + clientId + " not found"));
     }
 
     @Override

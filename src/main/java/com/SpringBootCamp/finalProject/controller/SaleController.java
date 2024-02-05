@@ -1,5 +1,6 @@
 package com.SpringBootCamp.finalProject.controller;
 
+import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.service.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/sale")
 public class SaleController {
 
     @Autowired
     private ISaleService saleServ;
 
-    @GetMapping("/sale/list")
+    @GetMapping("/list")
     public List<Sale> getSales(){
         return saleServ.saleList();
     }
 
-    @GetMapping("/sale/list/{saleCode}")
+    @GetMapping("list/{saleCode}")
     public Sale getSales(@PathVariable("saleCode") Long saleCode){
         return saleServ.findSale(saleCode);
+    }
+
+    @GetMapping("/products/{saleCode}")
+    public List<Product> saleProducts(@PathVariable Long saleCode){
+        return saleServ.findSale(saleCode).getProducts_list();
     }
 
     @PostMapping("/sale/create")

@@ -29,7 +29,7 @@ public class ProductService implements IProductService{
 
     @Override
     public Product findProduct(Long productCode) {
-        return productRepo.findById(productCode).orElse(null);
+        return productRepo.findById(productCode).orElseThrow(() -> new EntityNotFoundException("Product with id " + productCode + " not found"));
     }
 
     @Override

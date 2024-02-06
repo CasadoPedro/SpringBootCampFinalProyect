@@ -1,4 +1,4 @@
-# Bazar Management API
+# Shop Management API
 
 This Java Spring Boot API provides backend functionality for managing products, clients, and sales for a small shop.
 

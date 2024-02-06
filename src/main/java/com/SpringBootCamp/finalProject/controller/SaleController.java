@@ -1,11 +1,14 @@
 package com.SpringBootCamp.finalProject.controller;
 
+import com.SpringBootCamp.finalProject.dto.BiggestSaleDTO;
+import com.SpringBootCamp.finalProject.dto.SalesDayInfoDTO;
 import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.service.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,18 +32,27 @@ public class SaleController {
     public List<Product> saleProducts(@PathVariable Long saleCode){
         return saleServ.findSale(saleCode).getProducts_list();
     }
+    @GetMapping("/date/{date}")
+    public SalesDayInfoDTO dateSalesInfo(@PathVariable LocalDate date){
+        return saleServ.salesDayInfoDTO(date);
+    }
 
-    @PostMapping("/sale/create")
+    @GetMapping("/biggest_sale")
+    public BiggestSaleDTO biggestSale(){
+        return saleServ.findBiggestSale();
+    }
+
+    @PostMapping("/create")
     public void createSale(@RequestBody Sale sale){
         saleServ.saveSale(sale);
     }
 
-    @DeleteMapping("/sale/delete/{saleCode}")
+    @DeleteMapping("/delete/{saleCode}")
     public void deleteSale(@PathVariable Long saleCode){
         saleServ.deleteSale(saleCode);
     }
 
-    @PutMapping("/sale/edit/{saleCode}")
+    @PutMapping("/edit/{saleCode}")
     public void editSale(@PathVariable Long saleCode,
                            @RequestBody Sale sale){
         saleServ.editSale(saleCode,sale);

@@ -16,3 +16,7 @@ This Java Spring Boot API provides backend functionality for managing products, 
 2. Configure your database settings in `application.properties`.
 3. Run the application.
 4. Access the API using specified endpoints.
+
+## Postman Collection
+
+For testing and exploring the API, a Postman collection is provided. Import the `SpringBootProject.postman_collection.json` file into Postman to access pre-configured requests.

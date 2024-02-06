@@ -1,6 +1,6 @@
 # Bazar Management API
 
-This Java Spring Boot API provides backend functionality for managing products, clients, and sales for a bazar.
+This Java Spring Boot API provides backend functionality for managing products, clients, and sales for a small shop.
 
 ## Features
 
@@ -9,7 +9,6 @@ This Java Spring Boot API provides backend functionality for managing products, 
 - Get products of a specific sale.
 - Sum up sales on a particular day.
 - Find details of the highest sale.
-- Bonus: Additional features and improvements.
 
 ## Getting Started
 

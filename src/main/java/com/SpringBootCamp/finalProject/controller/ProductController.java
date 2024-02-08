@@ -2,7 +2,10 @@ package com.SpringBootCamp.finalProject.controller;
 
 import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.service.IProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,33 +18,34 @@ public class ProductController {
     private IProductService productServ;
 
     @GetMapping("/list")
-    public List<Product> getProducts(){
-        return productServ.productList();
+    public ResponseEntity<List<Product>> getAllProducts(){
+        return ResponseEntity.ok(productServ.productList());
     }
 
     @GetMapping("/list/{productCode}")
-    public Product getProducts(@PathVariable("productCode") Long productCode){
-        return productServ.findProduct(productCode);
+    public ResponseEntity<Product> getProduct(@PathVariable("productCode") Long productCode){
+        return ResponseEntity.ok(productServ.findProduct(productCode));
     }
     @GetMapping("/lower_stock/{quantity}")
-    public List<Product> lowerStock(@PathVariable Double quantity){
-        return productServ.lowerStock(quantity);
+    public ResponseEntity<List<Product>> lowerStock(@PathVariable Double quantity){
+        return ResponseEntity.ok(productServ.lowerStock(quantity));
     }
 
     @PostMapping("/create")
-    public void createProduct(@RequestBody Product product){
-        productServ.saveProduct(product);
+    public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product){
+        return new ResponseEntity<>(productServ.saveProduct(product), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{productCode}")
-    public void deleteProduct(@PathVariable Long productCode){
+    public ResponseEntity deleteProduct(@PathVariable Long productCode){
         productServ.deleteProduct(productCode);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/edit/{productCode}")
-    public void editProduct(@PathVariable Long productCode,
-                              @RequestBody Product product){
-        productServ.editProduct(productCode,product);
+    public ResponseEntity<Product> editProduct(@PathVariable Long productCode,
+                                               @RequestBody Product product){
+        return new ResponseEntity<>(productServ.editProduct(productCode,product), HttpStatus.OK);
     }
 
 }

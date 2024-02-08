@@ -42,4 +42,12 @@ public class ApplicationExceptionHandler {
         errorMap.put("Error: ", ex.getMessage());
         return errorMap;
     }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map<String, String>> handleConstraintViolation(ConstraintViolationException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        ex.getConstraintViolations().forEach(violation -> {
+            errorMap.put(violation.getPropertyPath().toString(), violation.getMessage());
+        });
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+    }
 }

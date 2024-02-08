@@ -2,7 +2,10 @@ package com.SpringBootCamp.finalProject.controller;
 
 import com.SpringBootCamp.finalProject.model.Client;
 import com.SpringBootCamp.finalProject.service.IClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +18,29 @@ public class ClientController {
     private IClientService clientServ;
 
     @GetMapping("/list")
-    public List<Client> getClients(){
-        return clientServ.clientList();
+    public ResponseEntity<List<Client>> getAllClients(){
+        return ResponseEntity.ok(clientServ.clientList());
     }
 
     @GetMapping("/list/{clientId}")
-    public Client getClients(@PathVariable("clientId") Long clientId){
-        return clientServ.findClient(clientId);
+    public ResponseEntity<Client> getClient(@PathVariable("clientId") Long clientId){
+        return ResponseEntity.ok(clientServ.findClient(clientId));
     }
 
     @PostMapping("/create")
-    public void createClient(@RequestBody Client client){
-        clientServ.saveClient(client);
+    public ResponseEntity<Client> createClient(@RequestBody @Valid Client client){
+        return new ResponseEntity<>(clientServ.saveClient(client), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{clientId}")
-    public void deleteClient(@PathVariable Long clientId){
+    public ResponseEntity deleteClient(@PathVariable Long clientId){
         clientServ.deleteClient(clientId);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/edit/{clientId}")
-    public void editClient(@PathVariable Long clientId,
-                            @RequestBody Client client){
-        clientServ.editClient(clientId,client);
+    public ResponseEntity<Client> editClient(@PathVariable Long clientId,
+                                             @RequestBody Client client){
+        return new ResponseEntity<>(clientServ.editClient(clientId,client), HttpStatus.OK);
     }
 }

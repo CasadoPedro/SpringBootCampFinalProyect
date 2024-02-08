@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IClientService {
 
-    public void saveClient(Client client);
+    public Client saveClient(Client client);
 
     public List<Client> clientList();
 
@@ -14,5 +14,5 @@ public interface IClientService {
 
     public void deleteClient(Long clientId);
 
-    public void editClient(Long clientId,Client updatedClient);
+    public Client editClient(Long clientId,Client updatedClient);
 }

@@ -5,6 +5,7 @@ import com.SpringBootCamp.finalProject.dto.SalesDayInfoDTO;
 import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.repository.ISaleRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.modelmapper.Condition;
 import org.modelmapper.Conditions;
@@ -21,12 +22,25 @@ public class SaleService implements ISaleService{
 
     @Autowired
     private ISaleRepository saleRepo;
+    @Autowired
+    private IClientService clientRepo;
+    @Autowired
+    private IProductService productRepo;
 
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public void saveSale(Sale sale) {
-        saleRepo.save(sale);
+    public Sale saveSale(Sale sale) {
+        Long clientId = sale.getClient().getClientId();
+        if (clientRepo.findClient(clientId) == null){
+            throw new EntityNotFoundException("Client with id " + clientId + " not found");
+        }
+        sale.getProducts_list().forEach(product ->{
+            if (productRepo.findProduct(product.getProductCode()) == null){
+                throw new EntityNotFoundException("Product with id " + product.getProductCode() + " not found");
+            }
+        });
+        return saleRepo.save(sale);
     }
 
     @Override
@@ -45,11 +59,11 @@ public class SaleService implements ISaleService{
     }
 
     @Override
-    public void editSale(Long saleCode, Sale updatedSale) {
+    public Sale editSale(Long saleCode,@Valid Sale updatedSale) {
         Sale sale = saleRepo.findById(saleCode).orElseThrow(() -> new EntityNotFoundException("Sale with id " + saleCode + " not found"));
         modelMapper.getConfiguration().setSkipNullEnabled(true);
         modelMapper.map(updatedSale, sale);
-        this.saveSale(sale);
+        return this.saveSale(sale);
     }
 
     @Override

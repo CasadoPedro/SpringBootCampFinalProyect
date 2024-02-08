@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ISaleService {
 
-    public void saveSale(Sale sale);
+    public Sale saveSale(Sale sale);
 
     public List<Sale> saleList();
 
@@ -17,7 +17,7 @@ public interface ISaleService {
 
     public void deleteSale(Long saleCode);
 
-    public void editSale(Long saleCode,Sale updatedSale);
+    public Sale editSale(Long saleCode,Sale updatedSale);
 
     public List<Sale> salesByDate(LocalDate date);
 

@@ -5,7 +5,11 @@ import com.SpringBootCamp.finalProject.dto.SalesDayInfoDTO;
 import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.service.ISaleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -19,42 +23,43 @@ public class SaleController {
     private ISaleService saleServ;
 
     @GetMapping("/list")
-    public List<Sale> getSales(){
-        return saleServ.saleList();
+    public ResponseEntity<List<Sale>> getAllSales(){
+        return ResponseEntity.ok(saleServ.saleList());
     }
 
     @GetMapping("list/{saleCode}")
-    public Sale getSales(@PathVariable("saleCode") Long saleCode){
-        return saleServ.findSale(saleCode);
+    public ResponseEntity<Sale> getSale(@PathVariable("saleCode") Long saleCode){
+        return ResponseEntity.ok(saleServ.findSale(saleCode));
     }
 
     @GetMapping("/products/{saleCode}")
-    public List<Product> saleProducts(@PathVariable Long saleCode){
-        return saleServ.findSale(saleCode).getProducts_list();
+    public ResponseEntity<List<Product>> saleProducts(@PathVariable Long saleCode){
+        return ResponseEntity.ok(saleServ.findSale(saleCode).getProducts_list());
     }
     @GetMapping("/date/{date}")
-    public SalesDayInfoDTO dateSalesInfo(@PathVariable LocalDate date){
-        return saleServ.salesDayInfoDTO(date);
+    public ResponseEntity<SalesDayInfoDTO> dateSalesInfo(@PathVariable LocalDate date){
+        return ResponseEntity.ok(saleServ.salesDayInfoDTO(date));
     }
 
     @GetMapping("/biggest_sale")
-    public BiggestSaleDTO biggestSale(){
-        return saleServ.findBiggestSale();
+    public ResponseEntity<BiggestSaleDTO> biggestSale(){
+        return ResponseEntity.ok(saleServ.findBiggestSale());
     }
 
     @PostMapping("/create")
-    public void createSale(@RequestBody Sale sale){
-        saleServ.saveSale(sale);
+    public ResponseEntity<Sale> createSale(@RequestBody @Valid Sale sale){
+        return new ResponseEntity<>(saleServ.saveSale(sale), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{saleCode}")
-    public void deleteSale(@PathVariable Long saleCode){
+    public ResponseEntity deleteSale(@PathVariable Long saleCode){
         saleServ.deleteSale(saleCode);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/edit/{saleCode}")
-    public void editSale(@PathVariable Long saleCode,
+    public ResponseEntity<Sale> editSale(@PathVariable Long saleCode,
                            @RequestBody Sale sale){
-        saleServ.editSale(saleCode,sale);
+        return new ResponseEntity<>(saleServ.editSale(saleCode,sale), HttpStatus.OK);
     }
 }

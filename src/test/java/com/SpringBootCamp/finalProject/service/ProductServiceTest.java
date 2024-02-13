@@ -74,7 +74,6 @@ class ProductServiceTest {
         verify(productRepo).deleteById(productCodeArgumentCaptor.capture());
         Long capturedProductCode = productCodeArgumentCaptor.getValue();
         assertThat(capturedProductCode).isEqualTo(productCode);
-        verify(productRepo).deleteById(productCode);
     }
 
     @Test

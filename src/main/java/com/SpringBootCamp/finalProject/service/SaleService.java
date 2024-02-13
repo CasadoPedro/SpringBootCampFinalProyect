@@ -8,11 +8,7 @@ import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.repository.ISaleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.apache.coyote.BadRequestException;
-import org.modelmapper.Condition;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +26,12 @@ public class SaleService implements ISaleService{
     private IProductService productServ;
 
     ModelMapper modelMapper = new ModelMapper();
+
+    public SaleService(ISaleRepository saleRepo, ClientService clientServ, ProductService productServ) {
+        this.saleRepo = saleRepo;
+        this.clientServ = clientServ;
+        this.productServ = productServ;
+    }
 
     @Override
     public Sale saveSale(Sale sale) {

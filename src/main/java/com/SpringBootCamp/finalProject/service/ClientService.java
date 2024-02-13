@@ -15,7 +15,11 @@ import java.util.List;
 public class ClientService implements IClientService{
 
     @Autowired
-    private IClientRepository clientRepo;
+    private final IClientRepository clientRepo;
+
+    public ClientService(IClientRepository clientRepo) {
+        this.clientRepo = clientRepo;
+    }
 
     ModelMapper modelMapper = new ModelMapper();
 

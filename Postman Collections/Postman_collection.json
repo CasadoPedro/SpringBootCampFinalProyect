@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "70646b60-4fe0-4d3d-a794-745097ee05c0",
+		"name": "SpringBootProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product_Requests",
+			"item": [
+				{
+					"name": "Create_Product",
+					"id": "7131ae8c-d754-4a3f-8b9a-aad6d48743b7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Phone\",\r\n    \"brand\":\"GenericBrand\",\r\n    \"cost\":149.99,\r\n    \"available_quantity\":70\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/product/create"
+					},
+					"response": []
+				},
+				{
+					"name": "List_Products",
+					"id": "37c9bd1a-333a-4ac9-baf7-c40b84c3b0be",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/product/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Product",
+					"id": "f034446a-6547-4292-aa50-56670c46689f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8080/product/delete/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit_Product",
+					"id": "be3da829-ace9-4f05-944f-da7380675f95",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"ProductName\",\r\n    \"brand\":\"GenericBrand\",\r\n    \"cost\":\"249.99\",\r\n    \"available_quantity\":100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/product/edit/1"
+					},
+					"response": []
+				},
+				{
+					"name": "LowStock",
+					"id": "e102b125-9cec-477d-a7df-f9fb294307f4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/product/lower_stock/100"
+					},
+					"response": []
+				}
+			],
+			"id": "4342e99c-79f8-43c8-923a-4465baffac97"
+		},
+		{
+			"name": "Client_Requests",
+			"item": [
+				{
+					"name": "List_Clients",
+					"id": "00cd6608-8371-458a-b217-3d9e5c11d5e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/client/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Client",
+					"id": "366aa8d2-2954-4c68-b0ea-09a88a492ff8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Alex\",\r\n    \"last_name\":\"Smith\",\r\n    \"email\":\"AlexSmith@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/client/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Client",
+					"id": "e184fff9-f680-4ac4-913a-26c95526e471",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8080/client/delete/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit_Client",
+					"id": "433d907b-8b4f-4c6c-aab7-a40b4bfe9465",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Jane\",\r\n    \"last_name\":\"Doe\",\r\n    \"email\":\"JaneDoe@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/client/edit/1"
+					},
+					"response": []
+				}
+			],
+			"id": "5f9b2c77-17ad-4240-bc97-640b3725c9dc"
+		},
+		{
+			"name": "Sale_Requests",
+			"item": [
+				{
+					"name": "Create_Sale",
+					"id": "bb4a22cb-f14f-4948-94b5-40d4668bb146",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sale_date\":\"2024-03-15\",\r\n    \"client\":{\r\n                \"clientId\":1\r\n    },\r\n    \"products_list\":[{\r\n        \"productCode\":1\r\n    },\r\n    {\r\n        \"productCode\":2\r\n    }]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/sale/create"
+					},
+					"response": []
+				},
+				{
+					"name": "List_Sales",
+					"id": "e6a57e40-5b50-4cee-a2f2-6d2a0474fde3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/sale/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Sale",
+					"id": "5c9e3083-90b9-41be-9c70-bc7554f3b331",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8080/sale/delete/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit_Sale",
+					"id": "867baa0b-8a12-4804-8b7e-9ebe396cca8b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sale_date\":\"2023-02-05\",\r\n    \"total_cost\":359.99,\r\n    \"client\":{\r\n                \"clientId\":2\r\n    },\r\n    \"products_list\":[{\r\n        \"productCode\":1\r\n    },\r\n    {\r\n        \"productCode\":2\r\n    }\r\n    ]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/sale/edit/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Sales_by_date",
+					"id": "c36eed10-b9d2-4084-a73b-6a5403be965b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/sale/date/2024-03-15"
+					},
+					"response": []
+				},
+				{
+					"name": "Biggest_Sale",
+					"id": "afd25627-dd55-4e84-8c70-6a418cbdcfee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/sale/biggest_sale"
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Sale_Product_List",
+					"id": "cefc5899-857a-4c9c-b17c-98622234c357",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/sale/products/1"
+					},
+					"response": []
+				}
+			],
+			"id": "707d7fd7-5cfb-4790-b5b1-7aaf8afa53de"
+		},
+		{
+			"name": "New Request",
+			"id": "f02876c3-a678-47ed-996b-f20a152bf4eb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -10,6 +10,10 @@ This Java Spring Boot API provides backend functionality for managing products, 
 - Sum up sales on a particular day.
 - Find details of the highest sale.
 
+## Testing
+
+The project is tested using JUnit, AssertJ, and Mockito.
+
 ## Getting Started
 
 1. Clone the repository.
@@ -19,4 +23,4 @@ This Java Spring Boot API provides backend functionality for managing products, 
 
 ## Postman Collection
 
-For testing and exploring the API, a Postman collection is provided. Import the `SpringBootProject.postman_collection.json` file into Postman to access pre-configured requests.
+For testing and exploring the API, a Postman collection is provided. Import the `Postman_collection.json` file inside Postman Collections directory into Postman to access pre-configured requests.

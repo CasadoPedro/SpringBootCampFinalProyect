@@ -53,7 +53,7 @@ public class ProductService implements IProductService{
 
     @Override
     public List<Product> lowerStock(Double quantity) {
-        return productRepo.findAllByAvailable_quantityLessThan(quantity);
+        return productRepo.findAllProductsByAvailableQuantityLessThan(quantity);
     }
 
 }

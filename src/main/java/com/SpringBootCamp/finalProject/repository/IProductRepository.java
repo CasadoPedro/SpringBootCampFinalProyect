@@ -12,5 +12,5 @@ import java.util.List;
 public interface IProductRepository extends JpaRepository <Product,Long>{
 
     @Query("SELECT p FROM Product p WHERE p.available_quantity < :quantity")
-    List<Product> findAllByAvailable_quantityLessThan(@Param("quantity") Double quantity);
+    List<Product> findAllProductsByAvailableQuantityLessThan(@Param("quantity") Double quantity);
 }

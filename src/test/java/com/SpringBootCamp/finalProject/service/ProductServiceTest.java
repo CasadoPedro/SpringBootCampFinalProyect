@@ -95,10 +95,10 @@ class ProductServiceTest {
     }
 
     @Test
-    void lower_stock_method_calls_product_repository_findAllByAvailable_quantityLessThan() {
+    void lower_stock_method_calls_product_repository_findAllProductsByAvailableQuantityLessThan() {
         //when
         underTest.lowerStock(anyDouble());
         //then
-        verify(productRepo).findAllByAvailable_quantityLessThan(anyDouble());
+        verify(productRepo).findAllProductsByAvailableQuantityLessThan(anyDouble());
     }
 }

@@ -33,7 +33,7 @@ class IProductRepositoryTest {
         productList.add(product);
         productList.add(product2);
         //when
-        List<Product> expected = underTest.findAllByAvailable_quantityLessThan(11.0);
+        List<Product> expected = underTest.findAllProductsByAvailableQuantityLessThan(11.0);
         //then
         assertThat(expected).usingRecursiveComparison().isEqualTo(productList);
     }
@@ -47,7 +47,7 @@ class IProductRepositoryTest {
         List<Product> productList = new ArrayList<>();
         productList.add(product2);
         //when
-        List<Product> expected = underTest.findAllByAvailable_quantityLessThan(6.0);
+        List<Product> expected = underTest.findAllProductsByAvailableQuantityLessThan(6.0);
         //then
         assertThat(expected).usingRecursiveComparison().isEqualTo(productList);
     }
@@ -59,7 +59,7 @@ class IProductRepositoryTest {
         underTest.save(product);
         underTest.save(product2);
         //when
-        List<Product> expected = underTest.findAllByAvailable_quantityLessThan(5.0);
+        List<Product> expected = underTest.findAllProductsByAvailableQuantityLessThan(5.0);
         //then
         assertThat(expected.size()).isEqualTo(0);
     }

@@ -24,9 +24,6 @@ public class Sale {
     private Long saleCode;
     @NotNull(message = "Sale date can't be null")
     private LocalDate sale_date;
-    @NotNull(message = "Total cost cannot be null")
-    @Min(value = 0, message = "Total cost must be greater than or equal to 0")
-    @Max(value = 9999, message = "Total cost must be less than or equal to 9999")
     private Double total_cost;
     @NotNull(message = "Client can't be null")
     @ManyToOne

@@ -2,6 +2,7 @@ package com.SpringBootCamp.finalProject.service;
 
 import com.SpringBootCamp.finalProject.dto.BiggestSaleDTO;
 import com.SpringBootCamp.finalProject.dto.SalesDayInfoDTO;
+import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.repository.ISaleRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,23 +24,27 @@ public class SaleService implements ISaleService{
     @Autowired
     private ISaleRepository saleRepo;
     @Autowired
-    private IClientService clientRepo;
+    private IClientService clientServ;
     @Autowired
-    private IProductService productRepo;
+    private IProductService productServ;
 
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public Sale saveSale(Sale sale) {
         Long clientId = sale.getClient().getClientId();
-        if (clientRepo.findClient(clientId) == null){
+        if (clientServ.findClient(clientId) == null){
             throw new EntityNotFoundException("Client with id " + clientId + " not found");
         }
-        sale.getProducts_list().forEach(product ->{
-            if (productRepo.findProduct(product.getProductCode()) == null){
+        Double totalCost = 0.0;
+        for(Product product : sale.getProducts_list()){
+            Product fullProduct = productServ.findProduct(product.getProductCode());
+            if (fullProduct == null){
                 throw new EntityNotFoundException("Product with id " + product.getProductCode() + " not found");
             }
-        });
+            totalCost += fullProduct.getCost();
+        }
+        sale.setTotal_cost(totalCost);
         return saleRepo.save(sale);
     }
 

@@ -1,6 +1,7 @@
 package com.SpringBootCamp.finalProject.advice;
 
 import com.SpringBootCamp.finalProject.exception.EmailAlreadyTakenException;
+import com.SpringBootCamp.finalProject.exception.OutOfStockException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,11 @@ public class ApplicationExceptionHandler {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("Error: ", ex.getMessage());
         return errorMap;
+    }
+
+    @ExceptionHandler(OutOfStockException.class)
+    public ResponseEntity handleOutOfStockException(OutOfStockException ex) {
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Map<String, String>> handleConstraintViolation(ConstraintViolationException ex) {

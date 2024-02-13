@@ -2,6 +2,7 @@ package com.SpringBootCamp.finalProject.service;
 
 import com.SpringBootCamp.finalProject.dto.BiggestSaleDTO;
 import com.SpringBootCamp.finalProject.dto.SalesDayInfoDTO;
+import com.SpringBootCamp.finalProject.exception.OutOfStockException;
 import com.SpringBootCamp.finalProject.model.Product;
 import com.SpringBootCamp.finalProject.model.Sale;
 import com.SpringBootCamp.finalProject.repository.ISaleRepository;
@@ -41,6 +42,9 @@ public class SaleService implements ISaleService{
             Product fullProduct = productServ.findProduct(product.getProductCode());
             if (fullProduct == null){
                 throw new EntityNotFoundException("Product with id " + product.getProductCode() + " not found");
+            }
+            if (fullProduct.getAvailable_quantity() <= 0.0){
+                throw new OutOfStockException("The product with code " + fullProduct.getProductCode() + " is out of stock");
             }
             totalCost += fullProduct.getCost();
         }

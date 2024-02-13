@@ -46,6 +46,8 @@ public class SaleService implements ISaleService{
             if (fullProduct.getAvailable_quantity() <= 0.0){
                 throw new OutOfStockException("The product with code " + fullProduct.getProductCode() + " is out of stock");
             }
+            fullProduct.setAvailable_quantity(fullProduct.getAvailable_quantity()-1);
+            productServ.editProduct(fullProduct.getProductCode(),fullProduct);
             totalCost += fullProduct.getCost();
         }
         sale.setTotal_cost(totalCost);

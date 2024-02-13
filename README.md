@@ -23,4 +23,4 @@ The project is tested using JUnit, AssertJ, and Mockito.
 
 ## Postman Collection
 
-For testing and exploring the API, a Postman collection is provided. Import the `SpringBootProject.postman_collection.json` file into Postman to access pre-configured requests.
+For testing and exploring the API, a Postman collection is provided. Import the `Postman_collection.json` file inside Postman Collections directory into Postman to access pre-configured requests.

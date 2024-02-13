@@ -90,7 +90,6 @@ class ClientServiceTest {
         verify(clientRepo).deleteById(clientIdArgumentCaptor.capture());
         Long capturedClientId = clientIdArgumentCaptor.getValue();
         assertThat(capturedClientId).isEqualTo(clientId);
-        verify(clientRepo).deleteById(clientId);
     }
 
     @Test
@@ -119,6 +118,5 @@ class ClientServiceTest {
         assertThat(capturedClient)
                 .usingRecursiveComparison()
                 .isEqualTo(new Client(1L,"Roger","Doe","rogerdoe@gmail.com",new ArrayList<>()));
-        verify(clientRepo).save(capturedClient);
     }
 }

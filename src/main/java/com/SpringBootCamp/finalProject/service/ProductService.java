@@ -18,6 +18,10 @@ public class ProductService implements IProductService{
     @Autowired
     private IProductRepository productRepo;
 
+    public ProductService(IProductRepository productRepo) {
+        this.productRepo = productRepo;
+    }
+
     @Override
     public Product saveProduct(Product product) {
 

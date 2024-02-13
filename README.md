@@ -10,6 +10,10 @@ This Java Spring Boot API provides backend functionality for managing products, 
 - Sum up sales on a particular day.
 - Find details of the highest sale.
 
+## Testing
+
+The project is tested using JUnit, AssertJ, and Mockito.
+
 ## Getting Started
 
 1. Clone the repository.
